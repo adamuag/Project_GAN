@@ -129,3 +129,18 @@ def group_labels(data, num=100):
         co_l.append(np.array(el_l).flatten()[:num])
     return co_l
 
+def group_all_labels(data):
+    # this function is to limit the number of labels that are used in ssl
+    # it returns the indexes according the labels
+    # data is an array of labels
+    # num is the number of labels needed per class
+
+    labels = np.unique(data)
+    co_l = []
+
+    for l in labels:
+        el_l = [np.where(data == l)]
+        co_l.append(np.array(el_l).flatten()[:])
+    return co_l
+
+
