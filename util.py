@@ -2,6 +2,10 @@ import numpy as np
 import scipy.io
 import gzip
 import cPickle
+import matplotlib as mlp
+
+mlp.use('Agg')
+
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 import tensorflow as tf
@@ -18,15 +22,16 @@ def isolate_class(l):
     return class_a_idx
 
 
-def vectorized_result(j):
-    e = np.zeros(10)
+def vectorized_result(j,n=10):
+    e = np.zeros(n)
     e[j] = 1
     return e
 
-def vectorized_result_svhn(j):
-    e = np.zeros(10)
+def vectorized_result_svhn(j, n=10):
+    e = np.zeros(n)
     e[j-1] = 1
     return e
+
 ''' no need to isolate data any more
 tr_label_idx = isolate_class(training_labels)
 tr_data = [training_data[tr_label_idx[d]] for d in range(len(tr_label_idx))]
@@ -123,4 +128,19 @@ def group_labels(data, num=100):
         el_l = [np.where(data == l)]
         co_l.append(np.array(el_l).flatten()[:num])
     return co_l
+
+def group_all_labels(data):
+    # this function is to limit the number of labels that are used in ssl
+    # it returns the indexes according the labels
+    # data is an array of labels
+    # num is the number of labels needed per class
+
+    labels = np.unique(data)
+    co_l = []
+
+    for l in labels:
+        el_l = [np.where(data == l)]
+        co_l.append(np.array(el_l).flatten()[:])
+    return co_l
+
 
