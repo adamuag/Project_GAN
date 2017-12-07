@@ -144,3 +144,5 @@ def group_all_labels(data):
     return co_l
 
 
+def load_SVHN(file):
+    return scipy.io.loadmat(file)
